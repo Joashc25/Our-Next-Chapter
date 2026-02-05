@@ -349,55 +349,58 @@
     </div>
 
     <script>
-        lucide.createIcons();
+        // Ensure scripts run after DOM is fully ready
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
 
-        let currentPage = 0;
-        const totalPages = 4;
-        const pages = [
-            document.getElementById('page1'),
-            document.getElementById('page2'),
-            document.getElementById('page3'),
-            document.getElementById('page4')
-        ];
+            let currentPage = 0;
+            const totalPages = 4;
+            const pages = [
+                document.getElementById('page1'),
+                document.getElementById('page2'),
+                document.getElementById('page3'),
+                document.getElementById('page4')
+            ];
 
-        function updateZIndices() {
+            function updateZIndices() {
+                pages.forEach((page, index) => {
+                    if (index < currentPage) {
+                        page.style.zIndex = index + 1;
+                    } else {
+                        page.style.zIndex = totalPages - index;
+                    }
+                });
+
+                document.getElementById('prevBtn').disabled = currentPage === 0;
+                document.getElementById('nextBtn').disabled = currentPage === totalPages;
+            }
+
+            updateZIndices();
+
+            window.nextPage = function() {
+                if (currentPage < totalPages) {
+                    pages[currentPage].classList.add('flipped');
+                    currentPage++;
+                    updateZIndices();
+                }
+            }
+
+            window.prevPage = function() {
+                if (currentPage > 0) {
+                    currentPage--;
+                    pages[currentPage].classList.remove('flipped');
+                    updateZIndices();
+                }
+            }
+
             pages.forEach((page, index) => {
-                if (index < currentPage) {
-                    page.style.zIndex = index + 1;
-                } else {
-                    page.style.zIndex = totalPages - index;
-                }
-            });
-
-            document.getElementById('prevBtn').disabled = currentPage === 0;
-            document.getElementById('nextBtn').disabled = currentPage === totalPages;
-        }
-
-        updateZIndices();
-
-        function nextPage() {
-            if (currentPage < totalPages) {
-                pages[currentPage].classList.add('flipped');
-                currentPage++;
-                updateZIndices();
-            }
-        }
-
-        function prevPage() {
-            if (currentPage > 0) {
-                currentPage--;
-                pages[currentPage].classList.remove('flipped');
-                updateZIndices();
-            }
-        }
-
-        pages.forEach((page, index) => {
-            page.addEventListener('click', () => {
-                if (page.classList.contains('flipped')) {
-                    if (index === currentPage - 1) prevPage();
-                } else {
-                    if (index === currentPage) nextPage();
-                }
+                page.addEventListener('click', () => {
+                    if (page.classList.contains('flipped')) {
+                        if (index === currentPage - 1) prevPage();
+                    } else {
+                        if (index === currentPage) nextPage();
+                    }
+                });
             });
         });
     </script>

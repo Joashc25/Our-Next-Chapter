@@ -23,12 +23,20 @@
         /* Book Structure */
         .book-container {
             perspective: 2500px;
-            width: 90vw;
+            width: 95vw;
             max-width: 1000px;
-            height: 85vh;
+            height: 70vh; /* Shorter on mobile by default */
             max-height: 700px;
             position: relative;
             z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        @media (min-width: 768px) {
+            .book-container {
+                height: 85vh;
+                width: 90vw;
+            }
         }
 
         .book {
@@ -59,11 +67,18 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding: 4rem 3rem;
+            padding: 1.5rem; /* Small padding for mobile */
             background: #fff;
             border: 1px solid #f3e8ff;
             box-shadow: inset 3px 0 20px rgba(0,0,0,0.02);
-            overflow: hidden;
+            overflow-y: auto; /* Allow internal scrolling if content overflows on tiny screens */
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .page-content {
+                padding: 4rem 3rem;
+            }
         }
 
         .page-back {
@@ -84,27 +99,36 @@
         /* Navigation Buttons */
         .nav-controls {
             position: fixed;
-            bottom: 2rem;
+            bottom: 1.5rem;
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             z-index: 100;
         }
 
         .nav-btn {
             background: rgba(255,255,255,0.9);
             backdrop-filter: blur(8px);
-            padding: 0.75rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 9999px;
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            font-size: 0.65rem;
             font-weight: 600;
             border: 1px solid #ddd6fe;
             color: #a78bfa;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(167, 139, 250, 0.1);
         }
+
+        @media (min-width: 768px) {
+            .nav-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.7rem;
+                bottom: 2rem;
+            }
+        }
+
         .nav-btn:hover:not(:disabled) { 
             background: #a78bfa; 
             color: white; 
@@ -126,14 +150,21 @@
 
         .illustration-box {
             width: 100%;
-            height: 240px;
+            height: 140px;
             background: #fdfaff;
-            border-radius: 2rem;
+            border-radius: 1.5rem;
             margin-top: auto;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid #f3e8ff;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .illustration-box {
+                height: 240px;
+            }
         }
 
         /* Specific Page Animations */
@@ -165,31 +196,31 @@
             <!-- Page 4: Accommodation & Back Cover -->
             <div class="page" id="page4">
                 <div class="page-content bg-white">
-                    <h3 class="text-4xl italic mb-6">Sweet Dreams</h3>
-                    <div class="space-y-4 text-lg text-gray-600">
+                    <h3 class="text-2xl md:text-4xl italic mb-4 md:mb-6">Sweet Dreams</h3>
+                    <div class="space-y-4 text-sm md:text-lg text-gray-600">
                         <p>Visit <a href="https://sweethomeweddings.co.za/accommodations/" target="_blank" class="text-purple-500 underline font-semibold">this site</a> for accommodation at Sweethome.</p>
-                        <p class="text-xs uppercase tracking-widest text-purple-400 pt-4 font-bold border-t border-purple-50">Recommended B&Bs within 5km:</p>
+                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-purple-400 pt-4 font-bold border-t border-purple-50">Recommended B&Bs within 5km:</p>
                         <ul class="space-y-2 font-sans font-medium text-[10px] tracking-wider uppercase">
-                            <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> THE PASTURES</li>
-                            <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> INSINGIZI LODGE & SPA</li>
-                            <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> GILLY’S GUEST HOUSE</li>
-                            <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> ANGELS WAY FARM</li>
+                            <li class="flex items-center gap-2 md:gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> THE PASTURES</li>
+                            <li class="flex items-center gap-2 md:gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> INSINGIZI LODGE & SPA</li>
+                            <li class="flex items-center gap-2 md:gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> GILLY’S GUEST HOUSE</li>
+                            <li class="flex items-center gap-2 md:gap-3"><div class="w-1.5 h-1.5 bg-purple-200 rounded-full"></div> ANGELS WAY FARM</li>
                         </ul>
                     </div>
                     <!-- Final Call to Action -->
-                    <div class="mt-auto pt-6 border-t border-purple-100 text-center">
-                        <p class="italic text-2xl text-purple-400 mb-6">Will you help us write the next page?</p>
+                    <div class="mt-auto pt-4 md:pt-6 border-t border-purple-100 text-center">
+                        <p class="italic text-lg md:text-2xl text-purple-400 mb-4 md:mb-6">Will you help us write the next page?</p>
                         <a href="https://forms.gle/wRHoVwQxabBN5UrF8" target="_blank" 
-                           class="inline-block bg-purple-50 text-purple-600 font-sans text-[11px] uppercase tracking-[0.2em] font-bold px-8 py-4 rounded-full border border-purple-200 hover:bg-purple-600 hover:text-white transition-all shadow-sm">
+                           class="inline-block bg-purple-50 text-purple-600 font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold px-6 py-3 md:px-8 md:py-4 rounded-full border border-purple-200 hover:bg-purple-600 hover:text-white transition-all shadow-sm">
                             RSVP Here
                         </a>
                     </div>
                 </div>
                 <div class="page-content page-back cover flex items-center justify-center border-l-8 border-purple-50">
-                    <div class="text-center">
-                        <i data-lucide="sparkles" class="w-16 h-16 mx-auto mb-6 opacity-70 text-purple-400"></i>
-                        <h2 class="text-5xl italic text-purple-600">Our Next Chapter</h2>
-                        <p class="text-xs uppercase tracking-[0.5em] mt-8 opacity-40 font-bold">Clarissa & Joash • 2026</p>
+                    <div class="text-center p-4">
+                        <i data-lucide="sparkles" class="w-10 h-10 md:w-16 md:h-16 mx-auto mb-4 md:mb-6 opacity-70 text-purple-400"></i>
+                        <h2 class="text-3xl md:text-5xl italic text-purple-600">Our Next Chapter</h2>
+                        <p class="text-[10px] md:text-xs uppercase tracking-[0.5em] mt-6 md:mt-8 opacity-40 font-bold">Clarissa & Joash • 2026</p>
                     </div>
                 </div>
             </div>
@@ -197,9 +228,9 @@
             <!-- Page 3: 2026 Milestone & Details -->
             <div class="page" id="page3">
                 <div class="page-content bg-white">
-                    <span class="text-purple-300 font-sans text-xs tracking-[0.3em] uppercase block mb-2">2026</span>
-                    <h3 class="text-5xl italic mb-4">The Ever After</h3>
-                    <p class="text-gray-500 text-lg leading-relaxed">
+                    <span class="text-purple-300 font-sans text-[10px] tracking-[0.3em] uppercase block mb-1 md:mb-2">2026</span>
+                    <h3 class="text-2xl md:text-5xl italic mb-2 md:mb-4">The Ever After</h3>
+                    <p class="text-gray-500 text-sm md:text-lg leading-relaxed">
                         Beneath the rafters of the chapel at Sweethome Farm, we will weave our lives together in a sacred covenant unto God. 
                         A spiritual vow to love and honor one another under His grace—beginning our forever with a devotion that is divine.
                     </p>
@@ -220,19 +251,19 @@
                         </svg>
                     </div>
                 </div>
-                <div class="page-content page-back bg-[#fdfcf8] p-10 justify-center">
-                    <div class="text-center space-y-12">
+                <div class="page-content page-back bg-[#fdfcf8] p-6 md:p-10 justify-center">
+                    <div class="text-center space-y-8 md:space-y-12">
                         <div>
-                            <i data-lucide="clock" class="w-8 h-8 mx-auto mb-4 text-purple-300"></i>
-                            <h3 class="text-3xl italic mb-3">The Gathering</h3>
-                            <p class="font-sans text-xs tracking-widest uppercase text-purple-800/60 leading-loose">
+                            <i data-lucide="clock" class="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4 text-purple-300"></i>
+                            <h3 class="text-2xl md:text-3xl italic mb-1 md:mb-3">The Gathering</h3>
+                            <p class="font-sans text-[9px] md:text-xs tracking-widest uppercase text-purple-800/60 leading-loose">
                                 Ceremony at 13:30<br>at the Chapel<br>Sweethome Farm, Eston
                             </p>
                         </div>
-                        <div class="pt-10 border-t border-purple-100">
-                            <i data-lucide="sparkles" class="w-8 h-8 mx-auto mb-4 text-purple-300"></i>
-                            <h3 class="text-3xl italic mb-3">Dress Code</h3>
-                            <p class="font-sans text-xs tracking-widest uppercase text-purple-800/60 font-semibold leading-loose">
+                        <div class="pt-6 md:pt-10 border-t border-purple-100">
+                            <i data-lucide="sparkles" class="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 md:mb-4 text-purple-300"></i>
+                            <h3 class="text-2xl md:text-3xl italic mb-1 md:mb-3">Dress Code</h3>
+                            <p class="font-sans text-[9px] md:text-xs tracking-widest uppercase text-purple-800/60 font-semibold leading-loose">
                                 Smart Formal,<br>Hints of Lilac & Fairy Dust
                             </p>
                         </div>
@@ -243,9 +274,9 @@
             <!-- Page 2: 2024 Milestone & Nov 2024 -->
             <div class="page" id="page2">
                 <div class="page-content bg-white">
-                    <span class="text-purple-300 font-sans text-xs tracking-[0.3em] uppercase block mb-2">2024</span>
-                    <h3 class="text-5xl italic mb-4">Growing Together</h3>
-                    <p class="text-gray-500 text-lg leading-relaxed">
+                    <span class="text-purple-300 font-sans text-[10px] tracking-[0.3em] uppercase block mb-1 md:mb-2">2024</span>
+                    <h3 class="text-2xl md:text-5xl italic mb-2 md:mb-4">Growing Together</h3>
+                    <p class="text-gray-500 text-sm md:text-lg leading-relaxed">
                         From shared laughs over culinary adventures to making sure we snap every single food pic before the first bite, 
                         this year has been a delicious journey. Between the stolen kisses and a gallery full of memories, 
                         every moment tastes just like forever.
@@ -268,29 +299,25 @@
                     </div>
                 </div>
                 <div class="page-content page-back bg-[#fdfcf8]">
-                    <span class="text-purple-300 font-sans text-xs tracking-[0.3em] uppercase block mb-2">November 2024</span>
-                    <h3 class="text-5xl italic mb-4">The Magic Moment</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed">
+                    <span class="text-purple-300 font-sans text-[10px] tracking-[0.3em] uppercase block mb-1 md:mb-2">November 2024</span>
+                    <h3 class="text-2xl md:text-5xl italic mb-2 md:mb-4">The Magic Moment</h3>
+                    <p class="text-gray-600 text-sm md:text-lg leading-relaxed">
                         Under the vast blue sky of the Durban coastline, aboard a romantic yacht, Joash asked the easiest question. 
                         With a shimmering purple gemstone and the salt spray in the air, we began our promise to always walk side by side, heading toward a future meant for us both.
                     </p>
                     
                     <div class="illustration-box bg-white">
                         <svg viewBox="0 0 200 200" class="w-3/4 h-3/4">
-                            <!-- Blue Sky/Water background -->
                             <rect x="20" y="20" width="160" height="160" rx="20" fill="#f0f9ff" opacity="0.5" />
-                            <!-- Yacht -->
                             <g class="animate-boat">
                                 <path d="M40 130 L160 130 L150 150 L50 150 Z" fill="#fff" stroke="#a78bfa" stroke-width="2" />
                                 <path d="M100 50 L100 130" stroke="#a78bfa" stroke-width="2" />
                                 <path d="M100 60 L140 120 L100 120 Z" fill="#f5f3ff" stroke="#a78bfa" stroke-width="1.5" />
                             </g>
-                            <!-- Purple Gemstone Ring -->
                             <g transform="translate(140, 50) scale(0.6)">
                                 <circle cx="50" cy="50" r="25" fill="none" stroke="#fbbf24" stroke-width="4" />
                                 <path d="M50 20 L65 35 L50 50 L35 35 Z" fill="#7c3aed" class="animate-pulse" />
                             </g>
-                            <!-- Waves -->
                             <path d="M20 160 Q60 150 100 160 Q140 170 180 160" fill="none" stroke="#bae6fd" stroke-width="3" stroke-linecap="round" />
                         </svg>
                     </div>
@@ -300,19 +327,19 @@
             <!-- Page 1: Cover & 2023 -->
             <div class="page" id="page1">
                 <div class="page-content cover text-center">
-                    <i data-lucide="sparkles" class="w-16 h-16 mx-auto mb-8 text-purple-400 opacity-60"></i>
-                    <span class="font-sans text-[11px] tracking-[0.6em] uppercase mb-6 block font-bold text-purple-400">Save The Date</span>
-                    <h1 class="text-7xl md:text-8xl mb-8 text-purple-600 leading-tight">Clarissa <br>& Joash</h1>
-                    <div class="w-20 h-px bg-purple-200 mx-auto mb-8"></div>
-                    <p class="italic text-4xl font-light text-purple-400 mb-4">"Our Next Chapter"</p>
-                    <div class="mt-14 text-xs font-sans tracking-[0.4em] font-bold text-purple-300 uppercase">
+                    <i data-lucide="sparkles" class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 md:mb-8 text-purple-400 opacity-60"></i>
+                    <span class="font-sans text-[10px] md:text-[11px] tracking-[0.4em] md:tracking-[0.6em] uppercase mb-4 md:mb-6 block font-bold text-purple-400">Save The Date</span>
+                    <h1 class="text-4xl md:text-8xl mb-4 md:mb-8 text-purple-600 leading-tight">Clarissa <br>& Joash</h1>
+                    <div class="w-16 md:w-20 h-px bg-purple-200 mx-auto mb-4 md:mb-8"></div>
+                    <p class="italic text-2xl md:text-4xl font-light text-purple-400 mb-4">"Our Next Chapter"</p>
+                    <div class="mt-8 md:mt-14 text-[10px] md:text-xs font-sans tracking-[0.3em] md:tracking-[0.4em] font-bold text-purple-300 uppercase">
                         May 09 • 2026
                     </div>
                 </div>
                 <div class="page-content page-back bg-white">
-                    <span class="text-purple-300 font-sans text-xs tracking-[0.3em] uppercase block mb-2">2023</span>
-                    <h3 class="text-5xl italic mb-4">The First Page</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed">
+                    <span class="text-purple-300 font-sans text-[10px] tracking-[0.3em] uppercase block mb-1 md:mb-2">2023</span>
+                    <h3 class="text-2xl md:text-5xl italic mb-2 md:mb-4">The First Page</h3>
+                    <p class="text-gray-600 text-sm md:text-lg leading-relaxed">
                         It all began with the magic of a first date: Clarissa’s favorite McDonald’s feast, a cute movie, and a single, bright sunflower. 
                         A golden afternoon where our forever first took root.
                     </p>
@@ -349,7 +376,6 @@
     </div>
 
     <script>
-        // Ensure scripts run after DOM is fully ready
         document.addEventListener('DOMContentLoaded', function() {
             lucide.createIcons();
 
